@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="change_product_special_price_name" xsi:type="object">
+                    Emotion\Onboarding\Console\Command\ChangesViaCli
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Emotion\Onboarding\Api\Data\OnboardingDataInterface"
+                type="Emotion\Onboarding\Model\OnboardingData\OnboardingData" />
+    <preference for="Emotion\Onboarding\Api\OnboardingRepositoryInterface"
+                type="Emotion\Onboarding\Model\OnboardingRepository" />
+    <preference for="Emotion\Onboarding\Api\Data\ContactDataInterface"
+                type="Emotion\Onboarding\Model\Contact\ContactData" />
+    <preference for="Emotion\Onboarding\Api\ContactRepositoryInterface"
+                type="Emotion\Onboarding\Model\ContactRepository" />
+<!--    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">-->
+<!--        <arguments>-->
+<!--            <argument name="collections" xsi:type="array">-->
+<!--                <item name="product_classes_assign_listing_data_source" xsi:type="string">Emotion\Onboarding\Model\ResourceModel\ContactFormCollection</item>-->
+<!--            </argument>-->
+<!--        </arguments>-->
+<!--    </type>-->
+
+    <virtualType name="ContactsGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Emotion\Onboarding\Model\ResourceModel\ContactFormCollection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">ContactsGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="ContactsGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="onboarding_onboarding_listing_data_source" xsi:type="string">Emotion\Onboarding\Model\ResourceModel\ContactFormCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Emotion\Onboarding\Model\ResourceModel\ContactFormCollection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">company_employees</argument>
+            <argument name="resourceModel" xsi:type="string">Emotion\Onboarding\Model\ResourceModel\ContactForm</argument>
+        </arguments>
+    </virtualType>
+</config>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Customer\Controller\Account\CreatePost">
+        <!--  #Task 30     -->
+        <plugin name="onboarding_change_customer_name"
+                type="Emotion\Onboarding\Plugin\Controller\BeforeCustomerAccountCreatePost"
+                sortOrder="1"
+                disabled="false"/>
+    </type>
+    <type name="Emotion\Onboarding\Controller\Index\Task">
+        <!--  #Task 31     -->
+        <plugin name="onboarding_change_page_title"
+                type="Emotion\Onboarding\Plugin\Controller\AfterTask"
+                sortOrder="1"
+                disabled="false"/>
+    </type>
+    <type name="Magento\Customer\Controller\Account\CreatePost">
+        <!--  #Task 32    -->
+        <plugin name="onboarding_yahoo_email_exception"
+                type="Emotion\Onboarding\Plugin\Controller\AroundCustomerAccountCreatePost"
+                sortOrder="1"
+                disabled="false"/>
+    </type>
+    <type name="Magento\Customer\Api\CustomerRepositoryInterface">
+        <plugin name="customer_onboarding_data_before"
+                type="Emotion\Onboarding\Plugin\OnboardingData\AfterGetPlugin" />
+    </type>
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="cms_block_config_provider" xsi:type="object">Emotion\Onboarding\Model\Checkout\ConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Emotion\Onboarding\Model\Checkout\ConfigProvider">
+        <arguments>
+            <argument name="blockId" xsi:type="string">checkout_sidebar_block</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+        <plugin name="change_sort_order_in_checkout_layoutProcessor" type="Emotion\Onboarding\Plugin\Block\Checkout\LayoutProcessor" sortOrder="50"/>
+    </type>
+</config>

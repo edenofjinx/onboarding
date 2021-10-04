@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @var $block \Emotion\Onboarding\Block\Form
+ * @var $escaper \Magento\Framework\Escaper;
+ */
+
+?>
+<?php $product = $block->getProductBySku('24-MB01'); ?>
+<?php if ($product): ?>
+<div class="product-form-wrapper">
+    <form action="<?= $block->getPostUrl(); ?>" method="post">
+        <div class="input">
+            <label for="name"><?= $escaper->escapeHtml(__('Product name')); ?></label>
+            <input type="text" id="name" name="name" value="<?= $escaper->escapeHtml($product->getName()); ?>">
+            <input type="hidden" name="sku" value="<?= $escaper->escapeHtml($product->getSku()); ?>">
+        </div>
+        <button class="submit"><?= $escaper->escapeHtml(__('Change product name')); ?></button>
+    </form>
+</div>
+<?php endif; ?>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Onboarding tasks</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <container name="emotion.onboarding.container" htmlTag="div" htmlClass="onboarding-container">
+                <block class="Emotion\Onboarding\Block\Task"
+                       name="emotion_onboarding_task" template="Emotion_Onboarding::task.phtml" cacheable="false">
+                    <arguments>
+                        <argument name="information_text"
+                                  xsi:type="string" translate="true">Information text</argument>
+                        <argument name="onboarding_view_model" xsi:type="object">
+                            Emotion\Onboarding\ViewModel\OnboardingViewModel
+                        </argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Cms\Block\Block" name="onboarding.cms.block">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">onboarding_cms_block</argument>
+                    </arguments>
+                </block>
+                <block class="Emotion\Onboarding\Block\Form"
+                       name="emotion_onboarding_form" template="Emotion_Onboarding::frontend_form.phtml" cacheable="false" />
+            </container>
+        </referenceContainer>
+    </body>
+    <move element="onboarding.cms.block" destination="emotion.onboarding.container" before="emotion_onboarding_task" />
+</page>

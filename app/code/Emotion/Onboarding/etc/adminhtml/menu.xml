@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Onboarding_menu::main_menu_item"
+             title="Onboarding"
+             module="Emotion_Onboarding"
+             sortOrder="70"
+             resource="Emotion_Onboarding::menu"/>
+        <add id="Onboarding_submenu::menu_settings"
+             title="Onboarding settings"
+             module="Emotion_Onboarding"
+             sortOrder="0"
+             action="adminhtml/system_config/edit/section/onboarding_settings"
+             parent="Onboarding_menu::main_menu_item"
+             resource="Magento_Backend::content"/>
+        <add id="Onboarding_block::block_settings"
+             title="Onboarding block"
+             module="Emotion_Onboarding"
+             sortOrder="0"
+             action="onboard/onboarding/index"
+             parent="Onboarding_menu::main_menu_item"
+             resource="Emotion_Onboarding::menu"/>
+        <add id="Onboarding_form::listing"
+             title="Contact Listing"
+             module="Emotion_Onboarding"
+             sortOrder="0"
+             action="onboard/onboarding/listing"
+             parent="Onboarding_menu::main_menu_item"
+             resource="Emotion_Onboarding::menu"/>
+    </menu>
+</config>

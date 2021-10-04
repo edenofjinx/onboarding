@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * @var $block \Emotion\Onboarding\Block\Task
+ * @var $escaper \Magento\Framework\Escaper;
+ * @var $onboardingViewModel \Emotion\Onboarding\ViewModel\OnboardingViewModel
+ */
+
+?>
+<h2>overridden template file</h2>
+<?= $escaper->escapeHtml($block->getText()); ?>
+<br>
+<?= $escaper->escapeHtml($block->getInfoText()); ?>
+<br>
+<?php $onboardingViewModel = $block->getData('onboarding_view_model'); ?>
+<?php if ($onboardingViewModel) : ?>
+    <?= $escaper->escapeHtml(__($onboardingViewModel->getViewModelText())); ?>
+<?php endif; ?>
+
+<?php $productBySku = $block->getProductBySku('24-MB01'); ?>
+<?php $productById = $block->getProductById(9); ?>
+
+<?php if ($productBySku): ?>
+    <div class="title"><?= $escaper->escapeHtml(__('Product by sku')); ?></div>
+    <div class="product-wrapper">
+        <div class="name"><?= $escaper->escapeHtml($productBySku->getName()); ?></div>
+        <div class="sku"><?= $escaper->escapeHtml($productBySku->getSku()); ?></div>
+        <div class="price"><?= $escaper->escapeHtml($productBySku->getPrice()); ?></div>
+        <div class="price"><?= $productBySku->getFormattedPrice(); ?></div>
+        <br>
+    </div>
+<?php endif; ?>
+<?php if ($productById): ?>
+    <div class="title"><?= $escaper->escapeHtml(__('Product by id')); ?></div>
+    <div class="product-wrapper">
+        <div class="name"><?= $escaper->escapeHtml($productById->getName()); ?></div>
+        <div class="sku"><?= $escaper->escapeHtml($productById->getSku()); ?></div>
+        <div class="price"><?= $escaper->escapeHtml($productById->getPrice()); ?></div>
+        <div class="price"><?= $productBySku->getFormattedPrice(); ?></div>
+        <br>
+    </div>
+<?php endif; ?>
+<?php $productList = $block->getProductList(); ?>
+<?php if ($productList->getTotalCount() > 0): ?>
+    <div class="title"><?= $escaper->escapeHtml(__('Product list')); ?></div>
+    <?php foreach ($productList->getItems() as $product): ?>
+        <div class="product-wrapper">
+            <div class="name"><?= $escaper->escapeHtml($product->getName()); ?></div>
+            <div class="sku"><?= $escaper->escapeHtml($product->getSku()); ?></div>
+            <div class="price"><?= $escaper->escapeHtml($product->getPrice()); ?></div>
+            <div class="price"><?= $product->getFormattedPrice(); ?></div>
+            <br>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
+<?php $productCollection = $block->getProductCollection(); ?>
+<?php if ($productCollection->getSize() > 0): ?>
+    <div class="title"><?= $escaper->escapeHtml(__('Product collection')); ?></div>
+    <?php foreach ($productCollection as $prod): ?>
+        <div class="product-wrapper">
+            <div class="name"><?= $escaper->escapeHtml($prod->getName()); ?></div>
+            <div class="sku"><?= $escaper->escapeHtml($prod->getSku()); ?></div>
+            <div class="price"><?= $escaper->escapeHtml($prod->getPrice()); ?></div>
+            <div class="price"><?= $prod->getFormattedPrice(); ?></div>
+            <br>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+<h3>Config data</h3>
+<p>Config text: <?= $block->getConfigText(); ?></p>
+<p>Config active: <?= $block->getActive(); ?></p>
+<div data-mage-init='{"onboard_js": {"message": <?= json_encode($escaper->escapeHtml($block->getText())) ?>}}'>

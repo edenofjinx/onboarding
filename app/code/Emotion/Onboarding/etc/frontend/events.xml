@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="view_model_text_observer">
+        <observer name="change_text_in_view_model"
+                  instance="Emotion\Onboarding\Observer\ChangeTextInViewModel"/>
+    </event>
+<!--    <event name="customer_register_success">-->
+<!--        <observer name="after_customer_registration_success"-->
+<!--                  instance="Emotion\Onboarding\Observer\CustomerAccountRegistrationSuccess"/>-->
+<!--    </event>-->
+</config>
